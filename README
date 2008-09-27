@@ -28,5 +28,11 @@ bad is nil for text nodes inside good tags, or is the tag name of the bad tag.
 
   <%= white_list(@article.body) { |node, bad| white_listed_bad_tags.include?(bad) ? nil : node.to_s.gsub(/</, '&lt;') } %>
   
+Ingress Filtering in a controller action.  This function will force the param specified (params[object][attribute]) to be
+run through the white_list object first.  As such, this keeps us from persisting malicious data to the database.
+
+  white_list_params!(:object, :attribute)
+  
+Original fork: http://github.com/railsmonk/white_list_objectified
 Original plugin website: http://weblog.techno-weenie.net/2006/9/3/white-listing-plugin-for-rails
 Original plugin SVN: http://svn.techno-weenie.net/projects/plugins/white_list/
